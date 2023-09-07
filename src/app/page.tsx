@@ -5,26 +5,26 @@
  import Button from "@/components/Button"
  import Form from "@/components/Form";
 import { useState , useEffect} from "react";
-//  import ClientRepository from "@/core/ClientRepository";
-//  import ClientCollection from "@/backend/db/ClientCollection";
+ import ClientRepository from "@/core/ClientRepository";
+ import ClientCollection from "@/backend/db/ClientCollection";
 
 
 
 
 
 export default function Home() {
-  //  const repo: ClientRepository = new ClientCollection()
+   const repo: ClientRepository = new ClientCollection()
 
    const [visible, setVisible] = useState<'table' | 'form'>('table')
-  //  const [clients, setClients] = useState<Client[]>([])
+   const [clients, setClients] = useState<Client[]>([])
    const [client, setClient] = useState<Client>(Client.void())
   
-   const clients = [
-     new Client('biel', 18, '1'),
-     new Client('Alan', 39, '2'),
-     new Client('Celia', 51, '3'),
-     new Client('Sofia', 24, '4'),
-   ]
+  //  const clients = [
+  //    new Client('biel', 18, '1'),
+  //    new Client('Alan', 39, '2'),
+  //    new Client('Celia', 51, '3'),
+  //    new Client('Sofia', 24, '4'),
+  //  ]
 
    function selectClient(client: Client) {
      setClient(client)
