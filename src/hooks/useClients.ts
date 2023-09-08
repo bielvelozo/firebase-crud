@@ -2,11 +2,12 @@ import Client from "@/core/Client";
 import { useState , useEffect} from "react";
 import ClientRepository from "@/core/ClientRepository";
 import ClientCollection from "@/backend/db/ClientCollection";
+import useSwitch from "./useSwitch";
 
 export default function useClients() {
     const repo: ClientRepository = new ClientCollection()
 
-    const [visible, setVisible] = useState<'table' | 'form'>('table')
+    const {tableVisible, formVisible , showForm , showTable} = useSwitch()
     const [clients, setClients] = useState<Client[]>([])
     const [client, setClient] = useState<Client>(Client.void())
    
@@ -16,13 +17,13 @@ export default function useClients() {
    
        repo.getAll().then(clients => {
          setClients(clients)
-         setVisible('table')
+         showTable()
        } )
      }
  
     function selectClient(client: Client) {
       setClient(client)
-      setVisible('form')
+      showForm()
     }
      async function deleteClient(client: Client) {
       await repo.delete(client)
@@ -31,7 +32,7 @@ export default function useClients() {
  
     function newClient() {
       setClient(Client.void())
-      setVisible('form')
+      showForm()
     }
    
      async function saveClient(client: Client) {
@@ -46,6 +47,9 @@ export default function useClients() {
         saveClient,
         deleteClient,
         selectClient,
-        getAll
+        getAll,
+        tableVisible,
+        formVisible,
+        showTable
     }
 }

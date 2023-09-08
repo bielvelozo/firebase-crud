@@ -6,6 +6,8 @@ export default function useSwitch() {
     const showForm = () => setVisible('form')
     return {
         formVisible: visible === 'form',
-        tableVisible: visible === 'table'
+        tableVisible: visible === 'table',
+        showForm,
+        showTable
     }
 }
